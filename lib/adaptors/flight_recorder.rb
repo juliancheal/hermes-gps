@@ -6,6 +6,7 @@ module Hermes
 
       def initialize(params={})
         @sp = SerialPort.new(params[:port], 4800)
+        @nmea_parser = Hermes::GPS::NMEAParser.new
         @nmea = Hermes::GPS::NMEA.new
         @buffer = ""
       end
@@ -22,13 +23,13 @@ module Hermes
 
       def read_and_process
         nmea = process(@sp)
-        nmea
+        return nmea
       end
 
       def process(sp)
         while(data = sp.gets) do
-          nmea = @nmea.parse_sentance(data)
-          return nmea
+          parsed_data = @nmea_parser.parse_sentance(data)
+          return @nmea.populate(parsed_data)
         end
       end
 

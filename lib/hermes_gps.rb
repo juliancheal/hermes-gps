@@ -3,6 +3,7 @@ require "connection"
 require "observer"
 require "superviser"
 require 'nmea'
+require 'nmea_parser'
 require "scanner"
 require 'serial'
 require 'serial_io'
