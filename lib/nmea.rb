@@ -175,8 +175,12 @@ module Hermes
       		return data
       	end
 
-      	type = line[0][2, 3]
+        if line[0][0, 1] != "$"
+          return data
+        end
 
+      	type = line[0][3, 3]
+        
       	line.shift
 
       	if type.nil?

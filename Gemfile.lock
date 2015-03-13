@@ -2,7 +2,8 @@ PATH
   remote: .
   specs:
     hermes_gps (0.0.1)
-      celluloid-io (~> 0.16.1)
+      celluloid (~> 0.16.0)
+      celluloid-io-serialport (~> 0.0.1)
       rubyserial (~> 0.2.2)
 
 GEM
@@ -10,15 +11,19 @@ GEM
   specs:
     celluloid (0.16.0)
       timers (~> 4.0.0)
-    celluloid-io (0.16.2)
-      celluloid (>= 0.16.0)
-      nio4r (>= 1.1.0)
+    celluloid-io (0.15.0)
+      celluloid (>= 0.15.0)
+      nio4r (>= 0.5.0)
+    celluloid-io-serialport (0.0.1)
+      celluloid-io (~> 0.15.0)
+      serialport (~> 1.1.0)
     ffi (1.9.6)
     hitimes (1.2.2)
     nio4r (1.1.0)
     rake (10.4.2)
     rubyserial (0.2.2)
       ffi (~> 1.9.3)
+    serialport (1.1.0)
     timers (4.0.1)
       hitimes
 

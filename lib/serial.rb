@@ -1,11 +1,8 @@
-# require 'celluloid/io'
 require 'rubyserial'
 
 module Hermes
   module GPS
-    class Client
-      # include Celluloid::IO
-      # finalizer :shutdown
+    class Serial
 
       def initialize(device, baud=4800)
         @sp = Serial.new(device, baud)
@@ -14,9 +11,9 @@ module Hermes
       end
 
       def read_and_process
-        loop do
-          process(read)
-        end
+        # nmea = process(read)
+        # nmea
+        "ALL THE LOCATIONS"
       end
 
       def read

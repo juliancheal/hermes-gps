@@ -1,25 +1,21 @@
-# require 'celluloid/io'
+require "celluloid/autostart"
 
 module Hermes
   module GPS
     class Scanner
-      # include Celluloid::IO
-      # include Celluloid::Logger
-      # finalizer :disconnect
+      include Celluloid, Celluloid::Notifications
 
-      def initialize(*args)
-        @client = Hermes::GPS::Client.new("/dev/tty.SLAB_USBtoUART", 4800)
+      def initialize
+        @serial = Hermes::GPS::SerialIO.new("/dev/tty.SLAB_USBtoUART", 4800)
       end
 
-      def self.connect(*args, &block)
-        client = Hermes::GPS::Scanner.new(*args)
-        client.connect(&block)
-        return client
-      end
-
-      def subscribe(geos)
-        @client.read_and_process
-        # @client.async.read
+      def scan(interval)
+        every interval do
+          data = @serial.read_and_process
+          unless data.empty?
+            publish("trol", data)
+          end
+        end
       end
 
     end

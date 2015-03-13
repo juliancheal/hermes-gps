@@ -1,12 +1,11 @@
 require "hermes_gps"
 
-scanner = Hermes::GPS::Scanner.new('/dev/tty.SLAB_USBtoUART', 4800)
+scanner = GPSScanner.new
 
-scanner.subscribe("") do |data|
-  lat = data[:latitude]
-  lon = data[:longitude]
+scanner.subscribe("trol") do |data|
+  lat = data[1][:latitude]
+  lon = data[1][:longitude]
 
   puts "Lat: #{lat}, Lon: #{lon}" unless lat.nil? && lon.nil?
 end
-# Hermes::GPS::Superviser.run
-sleep
+Hermes::GPS::Superviser.run
