@@ -2,7 +2,7 @@ require "hermes_gps"
 
 scanner = GPSScanner.new
 
-scanner.subscribe("trol") do |data|
+scanner.subscribe("GGA") do |data|
   lat = data[1][:latitude]
   lon = data[1][:longitude]
 

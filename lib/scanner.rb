@@ -13,7 +13,10 @@ module Hermes
         every interval do
           data = @serial.read_and_process
           unless data.empty?
-            publish("trol", data)
+            case data[:last_nmea]
+              when "GGA"
+                publish("GGA", data)
+            end
           end
         end
       end
