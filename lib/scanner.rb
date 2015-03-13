@@ -12,10 +12,7 @@ module Hermes
       def scan(interval)
         every interval do
           nmea = @connection.read_and_process
-          case nmea[0]
-            when "GGA"
-              publish("GGA", nmea[1])
-          end
+          publish(nmea[0], nmea[1]) unless nmea[0].nil?
         end
       end
 
