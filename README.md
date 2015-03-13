@@ -20,7 +20,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+```ruby
+require "hermes_gps"
+
+scanner = GPSScanner.new
+
+scanner.subscribe("GGA") do |data|
+  lat = data[1][:latitude]
+  lon = data[1][:longitude]
+
+  puts "Lat: #{lat}, Lon: #{lon}" unless lat.nil? && lon.nil?
+end
+Hermes::GPS::Superviser.run
+```
 
 ## Contributing
 
