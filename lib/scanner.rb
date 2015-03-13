@@ -6,12 +6,12 @@ module Hermes
       include Celluloid, Celluloid::Notifications
 
       def initialize
-        @serial = Hermes::GPS::SerialIO.new("/dev/tty.SLAB_USBtoUART", 4800)
+        @connection = Connection.new({name: :flight_recorder, adaptor: :flight_recorder, port: "/dev/tty.SLAB_USBtoUART"})
       end
 
       def scan(interval)
         every interval do
-          data = @serial.read_and_process
+          data = @connection.read_and_process
           unless data.empty?
             case data[:last_nmea]
               when "GGA"

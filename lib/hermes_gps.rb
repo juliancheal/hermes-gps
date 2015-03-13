@@ -1,4 +1,5 @@
 require "hermes_gps/version"
+require "connection"
 require "observer"
 require "superviser"
 require 'nmea'
