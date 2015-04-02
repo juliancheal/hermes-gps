@@ -1,6 +1,7 @@
 require "hermes_gps"
 
-scanner = GPSScanner.new({name: :flight_recorder, adaptor: :flight_recorder, port: "/dev/tty.usbmodem1a1241", baud: 115200})
+# scanner = GPSScanner.new({name: :flight_recorder, adaptor: :flight_recorder, port: "/dev/tty.usbmodem1a1241", baud: 115200})
+scanner = GPSScanner.new({name: :flight_recorder, adaptor: :flight_recorder, port: "/dev/tty.SLAB_USBtoUART", baud: 4800})
 
 scanner.subscribe("GGA") do |data|
   puts "data: #{data}"

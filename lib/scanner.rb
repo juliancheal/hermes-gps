@@ -5,8 +5,7 @@ module Hermes
     class Scanner
       include Celluloid, Celluloid::Notifications
 
-      def initialize(params)
-        puts caller[0]
+      def initialize(params={})
         @connection = Connection.new(params[0].to_h)
       end
 
