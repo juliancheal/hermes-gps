@@ -5,10 +5,8 @@ module Hermes
     class FlightRecorder < Adaptor
 
       def initialize(params={})
-        @sp = SerialPort.new(params[:port], 4800)
+        @sp = Hermes::GPS::SerialIO.new(params[:port], params[:baud])
         @nmea_parser = Hermes::GPS::NMEAParser.new
-        @nmea = Hermes::GPS::NMEA.new
-        @buffer = ""
       end
 
       def connect
@@ -22,16 +20,14 @@ module Hermes
       end
 
       def read_and_process
-        nmea = process(@sp)
-        return nmea
+        @sp.read_and_process
       end
 
-      def process(sp)
-        while(data = sp.gets) do
-          parsed_data = @nmea_parser.parse_sentance(data)
-          return @nmea.populate(parsed_data)
-        end
-      end
+      # def process(data)
+      #   while(@sentence = @sp.gets) do
+      #     @nmea_parser.parse_sentance(@sentence)
+      #   end
+      # end
 
     end
   end

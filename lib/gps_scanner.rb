@@ -1,6 +1,6 @@
 class GPSScanner
   def initialize(*args)
-    @scanner = Hermes::GPS::Scanner.new
+    @scanner = Hermes::GPS::Scanner.new(args)
     @scanner.async.scan(0.5)
   end
 

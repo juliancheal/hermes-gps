@@ -5,8 +5,9 @@ module Hermes
     class Scanner
       include Celluloid, Celluloid::Notifications
 
-      def initialize
-        @connection = Connection.new({name: :flight_recorder, adaptor: :flight_recorder, port: "/dev/tty.SLAB_USBtoUART"})
+      def initialize(params)
+        puts caller[0]
+        @connection = Connection.new(params[0].to_h)
       end
 
       def scan(interval)

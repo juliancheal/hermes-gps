@@ -180,7 +180,6 @@ module Hermes
         end
 
       	type = line[0][3, 3]
-
       	line.shift
 
       	if type.nil?

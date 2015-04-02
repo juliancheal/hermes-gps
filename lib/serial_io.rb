@@ -6,33 +6,19 @@ module Hermes
 
       def initialize(device, baud=4800)
         @sp = SerialPort.new(device, baud)
+        @nmea_parser = Hermes::GPS::NMEAParser.new
         @nmea = Hermes::GPS::NMEA.new
-        @buffer = ""
       end
 
       def read_and_process
-        # nmea = process(read)
         nmea = process(@sp)
-        # puts nmea
         nmea
-      end
-
-      def read
-        return @sp#.read(1)
       end
 
       def process(sp)
         while(data = sp.gets) do
-          nmea = @nmea.parse_sentance(data)
-          return nmea
-          # if data == "$"
-          #   nmea = @nmea.parse_sentance(@buffer)
-          #   puts nmea
-          #   @buffer = ""
-          #   return nmea
-          # else
-          #   @buffer << data
-          # end
+          parsed_data = @nmea_parser.parse_sentance(data)
+          return @nmea.populate(parsed_data)
         end
       end
 

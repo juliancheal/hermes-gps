@@ -59,7 +59,7 @@ module Hermes
 
       def require_adaptor(type, params)
         require "adaptors/#{type.to_s}"
-        @adaptor = constantize("Hermes::Adaptors::#{classify(type.to_s)}").new(port: port)
+        @adaptor = constantize("Hermes::Adaptors::#{classify(type.to_s)}").new(params)
       end
 
       def classify(word)
