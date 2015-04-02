@@ -23,12 +23,6 @@ module Hermes
         @sp.read_and_process
       end
 
-      # def process(data)
-      #   while(@sentence = @sp.gets) do
-      #     @nmea_parser.parse_sentance(@sentence)
-      #   end
-      # end
-
     end
   end
 end
